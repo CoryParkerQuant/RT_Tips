@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RealTest Reference — Complete 6-Document Guide</title>
+<style>
+:root {
+  --bg: #0c0c0c;
+  --surface: #141414;
+  --surface2: #1c1c1c;
+  --surface3: #242424;
+  --border: #2a2a2a;
+  --border2: #383838;
+  --text: #e2e0da;
+  --muted: #7a7876;
+  --dim: #3a3836;
+  --accent: #c8a96e;
+  --accent-dim: #6a5430;
+  --accent-bg: #1a1508;
+  --green: #5a8f5a;
+  --green-bg: #0e1a0e;
+  --red: #8f4a4a;
+  --red-bg: #1a0e0e;
+  --blue: #4a7a9f;
+  --blue-bg: #0e151a;
+  --mono: 'JetBrains Mono','Fira Code',Consolas,monospace;
+  --sans: 'Inter',system-ui,-apple-system,sans-serif;
+  --nav-width: 280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.7;display:flex;min-height:100vh}
+
+/* ── NAV ── */
+nav{width:var(--nav-width);flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--surface);border-right:1px solid var(--border);scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.nav-header{padding:1.25rem 1.25rem 1rem;border-bottom:1px solid var(--border)}
+.nav-header .eyebrow{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.35rem}
+.nav-header h1{font-size:13px;font-weight:600;color:var(--text);letter-spacing:-.01em}
+.nav-doc{margin-bottom:.25rem}
+.nav-doc-label{display:flex;align-items:center;gap:.5rem;padding:.5rem 1.25rem;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;user-select:none;border-left:2px solid transparent;transition:color .15s}
+.nav-doc-label:hover{color:var(--text)}
+.nav-doc-label .doc-num{font-family:var(--mono);color:var(--accent-dim);font-size:10px}
+.nav-doc-label.active-doc{color:var(--accent);border-left-color:var(--accent)}
+.nav-links{padding:0 0 .5rem}
+nav a{display:block;padding:.3rem 1.25rem .3rem 1.75rem;font-size:12px;color:var(--muted);text-decoration:none;border-left:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+nav a:hover{color:var(--text)}
+nav a.active{color:var(--accent);border-left-color:var(--accent)}
+
+/* ── MAIN ── */
+main{flex:1;padding:3rem 4rem 8rem;max-width:900px;min-width:0}
+
+/* ── PAGE HEADER ── */
+.page-header{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+.page-header .eyebrow{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.75rem}
+.page-header h1{font-size:26px;font-weight:600;letter-spacing:-.02em;margin-bottom:.75rem;line-height:1.25}
+.page-header p{color:var(--muted);font-size:14px;max-width:560px}
+
+/* ── DOC SECTIONS ── */
+.doc-section{margin-bottom:5rem;scroll-margin-top:2rem}
+.doc-title{display:flex;align-items:baseline;gap:.875rem;margin-bottom:2rem;padding-bottom:1rem;border-bottom:2px solid var(--accent-dim)}
+.doc-title .num{font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:700;letter-spacing:.08em}
+.doc-title h2{font-size:18px;font-weight:600;color:var(--text);letter-spacing:-.01em}
+.doc-subtitle{font-size:12px;color:var(--muted);margin-top:.25rem}
+
+/* ── TOPIC GROUPS ── */
+.topic-group{margin-bottom:2.5rem;scroll-margin-top:2rem}
+.topic-group h3{font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.05em;text-transform:uppercase;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+
+/* ── ENTRIES ── */
+.entry{background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:1rem 1.25rem;margin-bottom:.75rem}
+.entry:hover{border-color:var(--border2)}
+.entry-q{font-size:13px;font-weight:600;color:var(--text);margin-bottom:.5rem}
+.entry-a{font-size:13px;color:var(--muted);line-height:1.65}
+.entry-a p{margin-bottom:.5rem}
+.entry-a p:last-child{margin-bottom:0}
+
+/* ── CODE ── */
+pre{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:.875rem 1rem;overflow-x:auto;margin:.625rem 0;font-family:var(--mono);font-size:12px;line-height:1.6;color:#c8c4bc}
+code{font-family:var(--mono);font-size:11.5px;background:var(--surface2);border:1px solid var(--border);padding:1px 5px;border-radius:3px;color:var(--accent)}
+pre code{background:none;border:none;padding:0;font-size:inherit;color:inherit}
+.c-comment{color:#4a4846}
+.c-kw{color:#7a9abf}
+.c-val{color:#7aaf7a}
+.c-str{color:#c8a96e}
+
+/* ── CALLOUTS ── */
+.callout{border-radius:4px;padding:.75rem 1rem;font-size:12.5px;margin:.625rem 0;border-left:3px solid;display:flex;gap:.625rem;line-height:1.6}
+.callout-icon{flex-shrink:0;margin-top:1px;font-style:normal}
+.warn{background:#1a1600;border-color:#6a5000;color:#c8a040}
+.flag{background:var(--red-bg);border-color:var(--red);color:#bf8080}
+.ok{background:var(--green-bg);border-color:var(--green);color:#80af80}
+.info{background:var(--blue-bg);border-color:var(--blue);color:#80aabf}
+
+/* ── LESSON LIST ── */
+.lesson-list{list-style:none}
+.lesson-item{display:flex;gap:1.25rem;padding:.875rem 0;border-bottom:1px solid var(--border)}
+.lesson-item:last-child{border-bottom:none}
+.lesson-num{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--accent-dim);min-width:24px;padding-top:2px;flex-shrink:0}
+.lesson-body strong{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:.3rem}
+.lesson-body p{font-size:12.5px;color:var(--muted);line-height:1.65}
+
+/* ── FOOTER ── */
+footer{font-size:11px;color:var(--dim);padding-top:2rem;border-top:1px solid var(--border);margin-top:4rem}
+
+@media(max-width:800px){
+  body{flex-direction:column}
+  nav{width:100%;height:auto;position:static}
+  main{padding:1.5rem 1.25rem 4rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <div class="nav-header">
+    <div class="eyebrow">RealTest · Norgate · US Equities</div>
+    <h1>Complete Reference Guide</h1>
+  </div>
+
+  <div class="nav-doc">
+    <div class="nav-doc-label"><span class="doc-num">01</span> FAQ by Topic</div>
+    <div class="nav-links">
+      <a href="#faq-entries">Entries, exits &amp; timing</a>
+      <a href="#faq-sizing">Position sizing &amp; allocation</a>
+      <a href="#faq-data">Data &amp; imports</a>
+      <a href="#faq-multi">Multi-strategy &amp; rotation</a>
+      <a href="#faq-metrics">Results &amp; metrics</a>
+      <a href="#faq-syntax">Formulas &amp; syntax</a>
+      <a href="#faq-optimize">Optimization &amp; validation</a>
+      <a href="#faq-charts">Charts &amp; output</a>
+    </div>
+  </div>
+
+  <div class="nav-doc">
+    <div class="nav-doc-label"><span class="doc-num">02</span> Coding Tips</div>
+    <div class="nav-links">
+      <a href="#tips-structure">Script structure</a>
+      <a href="#tips-speed">Writing fast scripts</a>
+      <a href="#tips-formulas">Formula language</a>
+      <a href="#tips-selfref">Self-referential &amp; state</a>
+      <a href="#tips-crosssect">Cross-sectional # functions</a>
+      <a href="#tips-extern">Other symbols &amp; timeframes</a>
+      <a href="#tips-exits">Entries, exits &amp; stops</a>
+      <a href="#tips-sizing">Position sizing recipes</a>
+      <a href="#tips-portfolio">Multi-strategy portfolios</a>
+    </div>
+  </div>
+
+  <div class="nav-doc">
+    <div class="nav-doc-label"><span class="doc-num">03</span> Hidden Gems</div>
+    <div class="nav-links">
+      <a href="#gems-outside">Outside data</a>
+      <a href="#gems-validate">Honest validation</a>
+      <a href="#gems-account">Realistic account modeling</a>
+      <a href="#gems-output">Richer output</a>
+      <a href="#gems-live">Bridge to live trading</a>
+      <a href="#gems-meta">Meta-strategies</a>
+      <a href="#gems-speed">Performance</a>
+    </div>
+  </div>
+
+  <div class="nav-doc">
+    <div class="nav-doc-label"><span class="doc-num">04</span> Gotchas</div>
+    <div class="nav-links">
+      <a href="#gotcha-timing">Order timing &amp; execution</a>
+      <a href="#gotcha-nan">NaN &amp; formula evaluation</a>
+      <a href="#gotcha-context">Formula context</a>
+      <a href="#gotcha-sizing">Position sizing math</a>
+      <a href="#gotcha-calendar">Global market calendar</a>
+      <a href="#gotcha-data">Data, splits &amp; dividends</a>
+      <a href="#gotcha-ranking">Ranking &amp; selection</a>
+      <a href="#gotcha-charts">Charts &amp; display</a>
+    </div>
+  </div>
+
+  <div class="nav-doc">
+    <div class="nav-doc-label"><span class="doc-num">05</span> OrderClerk</div>
+    <div class="nav-links">
+      <a href="#oc-workflow">Daily workflow</a>
+      <a href="#oc-connect">Connecting to IB</a>
+      <a href="#oc-orders">Order types</a>
+      <a href="#oc-reconcile">Reconciliation</a>
+      <a href="#oc-corporate">Corporate actions</a>
+      <a href="#oc-timezones">Timezones &amp; holidays</a>
+      <a href="#oc-automation">Automation</a>
+      <a href="#oc-multi">Multiple accounts</a>
+      <a href="#oc-trouble">Troubleshooting</a>
+    </div>
+  </div>
+
+  <div class="nav-doc">
+    <div class="nav-doc-label"><span class="doc-num">06</span> Strategy Patterns</div>
+    <div class="nav-links">
+      <a href="#pat-mr">Mean reversion</a>
+      <a href="#pat-trend">Trend &amp; breakout</a>
+      <a href="#pat-rotation">Momentum rotation</a>
+      <a href="#pat-bensdorp">Bensdorp framework</a>
+      <a href="#pat-moc">MOC &amp; day trading</a>
+      <a href="#pat-overlays">Overlays &amp; combining</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ MAIN ══════════ -->
+<main>
+
+<div class="page-header">
+  <div class="eyebrow">Built from the RealTest community forum · Adrian Reid / Enlightened Stock Trading</div>
+  <h1>RealTest Complete Reference</h1>
+  <p>Six-document guide covering FAQ, coding best practices, hidden gems, gotchas, live trading with OrderClerk, and strategy patterns. All confirmed against Marsten Parker's forum answers.</p>
+</div>
+
+
+<!-- ════════════════════════════════════
+     DOC 1 — FAQ
+═════════════════════════════════════ -->
+<div class="doc-section" id="doc1">
+  <div class="doc-title">
+    <span class="num">01</span>
+    <div><h2>FAQ by Topic</h2><div class="doc-subtitle">First place to look for "how do I…?" and "why does…?"</div></div>
+  </div>
+
+  <!-- ENTRIES -->
+  <div class="topic-group" id="faq-entries">
+    <h3>Entries, exits &amp; order timing</h3>
+
+    <div class="entry">
+      <div class="entry-q">What's the difference between EntrySetup, EntryLimit, and EntryStop?</div>
+      <div class="entry-a"><p><code>EntrySetup</code> is a true/false condition making a symbol a candidate. <code>EntryLimit</code> and <code>EntryStop</code> are prices — not conditions. No limit/stop = market order.</p></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">What do ThisClose, NextClose, and NextOpen mean?</div>
+      <div class="entry-a"><p><code>NextOpen</code>: evaluated at today's close, fills tomorrow's open (most common). <code>NextClose</code>: fills tomorrow's close. <code>ThisClose</code>: acts at today's close — cannot be a live order placed in advance.</p></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Can I use a different exit time per exit reason?</div>
+      <div class="entry-a"><p>Not directly — <code>ExitTime</code> is a single setting. Workaround: drive a differently-timed exit through an <code>ExitStop</code>/<code>ExitLimit</code> price guaranteed to trigger, leaving other exits on the main <code>ExitTime</code>.</p></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">How do I build a trailing stop?</div>
+      <div class="entry-a">
+        <p><code>ExitStop</code> is recalculated every bar, so any formula referencing the bar trails automatically. To prevent loosening, wrap with <code>max(PrevExitStop, ...)</code>.</p>
+        <pre>ExitStop: max(PrevExitStop, Highest(H, 10) - 3*ATR(10))</pre>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">If more limit-order setups qualify than MaxPositions allows, which fill?</div>
+      <div class="entry-a"><p>Use <code>SetupScore</code> (with <code>MaxSetups</code>) to rank which orders get placed, and <code>EntryScore</code> (with <code>MaxPositions</code>) to rank which fills to keep. Without scores, RealTest falls back to alphabetical — biases results.</p></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">What's the difference between ExitRule and ExitStop?</div>
+      <div class="entry-a"><p><code>ExitRule</code> is a true/false condition evaluated at the bar's close. <code>ExitStop</code> is a stop price checked against the bar's range — can catch intraday gaps through the level. Choose based on whether you want close-based or stop-price exit.</p></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">No trades are being generated — how do I debug?</div>
+      <div class="entry-a"><p>Check in order: Is <code>EntrySetup</code> ever true? Is <code>Side</code> specified? Is <code>Quantity</code> &gt; 0? Are <code>MaxPositions</code>/<code>MaxInvested</code>/other caps blocking? Enable full trade keeping — skipped trades appear in the trade list with a reason column.</p></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">How do I take only one new entry per day when many setups qualify?</div>
+      <div class="entry-a"><p>Cap with <code>MaxEntries: 1</code> and rank candidates with <code>EntryScore</code> so the best one is chosen.</p></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">How do I stop re-entering a stock right after it exits?</div>
+      <div class="entry-a"><p>Add a cooldown to the setup using a count of recent exits — require no exits in the last N bars before allowing a new entry.</p></div>
+    </div>
+  </div>
+
+  <!-- SIZING -->
+  <div class="topic-group" id="faq-sizing">
+    <h3>Position sizing &amp; allocation</h3>
+
+    <div class="entry">
+      <div class="entry-q">What are the three Allocation modes?</div>
+      <div class="entry-a">
+        <p><code>S.StartEquity</code> — non-compounded, fixed base. <code>S.Equity</code> — compounded, each strategy on its own equity. <code>Combined(S.Equity)</code> — compounded, all strategies sharing one pool. Put sizing math in <code>Quantity</code>, not <code>Allocation</code>.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Should I use S.Alloc or S.Equity in my Quantity formula?</div>
+      <div class="entry-a"><p>Prefer <code>S.Alloc</code> — updated once per day after the close, stable between entry and exit order computation. <code>S.Equity</code> changes as positions close during the day, causing order quantities to drift.</p></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Common sizing recipes</div>
+      <div class="entry-a">
+        <pre><span class="c-comment">// Equal weight</span>
+Quantity: 100 / MaxPositions  |  QtyType: Percent
+
+<span class="c-comment">// ATR-scaled volatility sizing</span>
+Quantity: 0.01 * S.Alloc / (3 * ATR(20))  |  QtyType: Shares
+
+<span class="c-comment">// Fixed risk to stop</span>
+Quantity: 0.01 * S.Alloc / Abs(FillPrice - stopPrice)  |  QtyType: Shares</pre>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">What's the difference between MaxPositions, MaxSetups, MaxInvested, and MaxExposure?</div>
+      <div class="entry-a"><p><code>MaxPositions</code>: cap on concurrent holds. <code>MaxSetups</code>: cap on placed limit/stop orders (avoids selection bias). <code>MaxInvested</code>: cap on current MTM dollars. <code>MaxExposure</code>: cap on committed capital at entry. Use the one that matches the constraint you actually mean.</p></div>
+    </div>
+  </div>
+
+  <!-- DATA -->
+  <div class="topic-group" id="faq-data">
+    <h3>Data &amp; imports</h3>
+
+    <div class="entry">
+      <div class="entry-q">Simplest Norgate import</div>
+      <div class="entry-a">
+        <pre>Import:
+    DataSource: Norgate
+    IncludeList: .Russell 3000 Current &amp; Past
+    EndDate: Latest
+    SaveAs: data.rtd</pre>
+        <p>Leading dot = dynamic watchlist. "Current &amp; Past" includes delisted members — required to avoid survivorship bias.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Which adjustment mode — Capital, TotalReturn, or CapitalSpecial?</div>
+      <div class="entry-a"><p>Use <code>Adjustment: Capital</code> for order generation and most backtesting. <code>TotalReturn</code> for long-horizon total-return comparisons. Never use <code>CapitalSpecial</code> for live order generation — it adjusts share counts for special dividends; your broker does not.</p></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Does RealTest use adjusted or unadjusted prices?</div>
+      <div class="entry-a"><p>Formulas use as-traded (unadjusted) prices and volume; indicators are adjusted as of the current bar. This removes a subtle split-related ranking bias that pre-adjusted data introduces.</p></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">What does Padding do?</div>
+      <div class="entry-a"><p>Fills missing bars (holidays, halts, mismatched calendars) so every symbol aligns to a common date list. <code>Padding: AllMarketDays</code> is the common choice. Mismatched calendars are a frequent source of surprises when mixing FX/crypto with stocks.</p></div>
+    </div>
+  </div>
+
+  <!-- MULTI -->
+  <div class="topic-group" id="faq-multi">
+    <h3>Multi-strategy &amp; rotation</h3>
+
+    <div class="entry">
+      <div class="entry-q">How do I stop two strategies holding the same symbol?</div>
+      <div class="entry-a">
+        <pre>EntrySetup: setupConditions and Combined(Shares) = 0</pre>
+        <p>Also drops open positions from ranking automatically because <code>SetupScore</code> only ranks symbols passing <code>EntrySetup</code>.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">How do I rotate or rebalance monthly?</div>
+      <div class="entry-a">
+        <pre>firstOfMonth: Month &lt;&gt; Month[1]   <span class="c-comment">// first bar of new month</span>
+rebalance:    EndOfMonth            <span class="c-comment">// last bar of month</span></pre>
+        <div class="callout warn"><span class="callout-icon">→</span><span><code>EndOfMonth</code> uses the global calendar; <code>Month</code> uses the symbol's own. Adding FX/crypto can shift EndOfMonth triggers — use <code>Month &lt;&gt; Month[-1]</code> for symbol-specific boundaries.</span></div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">How do I hold until rank drops below a wider threshold to reduce churn?</div>
+      <div class="entry-a">
+        <pre>ExitRule: rotate and posrank &gt; worstRank  <span class="c-comment">// worstRank &gt; N</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- METRICS -->
+  <div class="topic-group" id="faq-metrics">
+    <h3>Results &amp; metrics</h3>
+
+    <div class="entry">
+      <div class="entry-q">What do ROR, MAR, Sharpe, Sortino, UPI mean?</div>
+      <div class="entry-a"><p>ROR: annualized return (geometric when compounding on). MAR: ROR / max drawdown. Sharpe: excess return over total volatility. Sortino: excess return over downside volatility only. UPI: uses ulcer index (depth + duration of drawdown) instead of volatility. All three risk-adjusted ratios depend on the risk-free rate set.</p></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">What's a reasonable expectancy?</div>
+      <div class="entry-a"><p>Forum rule of thumb: short-term systems need roughly 0.4–0.5% per trade so slippage and costs don't erase edge. Strategies trading less often need more per trade.</p></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Mark-to-market vs closed equity — which do the stats use?</div>
+      <div class="entry-a"><p>Default: mark-to-market (unrealized) equity — industry norm. Set <code>MarkToMarket: False</code> to base every stat on closed-trade P&L only. Open-position swings affect drawdown far more than total return.</p></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Why did results change between two identical runs?</div>
+      <div class="entry-a"><p>Almost always the data changed (Norgate overnight revision) or a setting differed (Padding, Adjustment, Compounding, date range). Pin the data file and date range for reproducible tests. Norgate revisions finish ~6:45 AM ET — generate live orders morning-of, not prior evening.</p></div>
+    </div>
+  </div>
+
+  <!-- SYNTAX -->
+  <div class="topic-group" id="faq-syntax">
+    <h3>Formulas &amp; syntax</h3>
+
+    <div class="entry">
+      <div class="entry-q">How do I reference a previous bar?</div>
+      <div class="entry-a">
+        <pre>C[1]              <span class="c-comment">// yesterday's close</span>
+H[5]              <span class="c-comment">// high 5 bars ago</span>
+C[BarsHeld]       <span class="c-comment">// close on the entry bar</span>
+HHV(H, 50)[1]     <span class="c-comment">// 50-bar high as it stood 50 bars ago (not current)</span></pre>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">My L &lt; LLV(L,5) setup returns no trades — why?</div>
+      <div class="entry-a"><p>Today's low can't be lower than the lowest low of the last 5 bars, which includes today. Compare to the prior bar: <code>L &lt; LLV(L,5)[1]</code></p></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Fast all-time high calculation</div>
+      <div class="entry-a">
+        <pre><span class="c-comment">// Self-referential — far faster than Highest(C, BarNum)</span>
+ATH: if(BarNum = 1, C, Max(C, ATH[1]))</pre>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">How do I reference another symbol's data?</div>
+      <div class="entry-a">
+        <pre>spxTrend: Extern($SPY, C &gt; MA(C, 200))   <span class="c-comment">// $ = stock symbol</span>
+vixLevel: Extern($$VIX, C)                <span class="c-comment">// $$ = symbol starting with $</span>
+eqCurve:  Extern(@stratName, S.Equity)    <span class="c-comment">// @ = strategy</span>
+wklyVal:  Extern(~Weekly, ROC(C, 12))     <span class="c-comment">// ~ = timeframe</span></pre>
+        <div class="callout flag"><span class="callout-icon">⚠</span><span>Omitting the <code>$</code> prefix causes "unrecognized syntax element" error.</span></div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">How do I label exits with reasons?</div>
+      <div class="entry-a">
+        <pre>ExitRule: Select(C &gt; targetPrice, "target",
+                 C &lt; stopPrice,   "stop",
+                 BarsHeld &gt;= 10,  "time")</pre>
+        <p>When used in <code>ExitRule</code>, the <code>Select()</code> must be the entire rule.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTIMIZE -->
+  <div class="topic-group" id="faq-optimize">
+    <h3>Optimization &amp; validation</h3>
+
+    <div class="entry">
+      <div class="entry-q">How do I set up an optimization?</div>
+      <div class="entry-a">
+        <pre>Parameters:
+    maLen: 50 to 200 step 10 def 100</pre>
+        <p><code>def</code> is the value used in normal (non-optimize) runs.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Does parameter order matter for speed?</div>
+      <div class="entry-a"><p>Yes. The top parameter varies fastest (innermost loop). Put slow, expensive parameters (long moving averages) first so cached calculations are reused. Order AND-conditions cheapest-first also short-circuits expensive terms.</p></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">How do I pick robust parameters?</div>
+      <div class="entry-a"><p>Favor a broad plateau over a lone sharp peak. The 2D optimization heatmap makes plateaus visible — choose from the middle of one. A parameter at the edge of the tested range is a red flag the range was too narrow.</p></div>
+    </div>
+  </div>
+
+  <!-- CHARTS -->
+  <div class="topic-group" id="faq-charts">
+    <h3>Charts &amp; output</h3>
+
+    <div class="entry">
+      <div class="entry-q">How do I plot an indicator on the chart?</div>
+      <div class="entry-a">
+        <pre>Charts:
+    ma200: MA(C, 200) {^}      <span class="c-comment">// price pane</span>
+    rsi2:  RSI(2)    {^1#2}    <span class="c-comment">// indicator pane 1, 2 decimal places</span>
+    rsi14: RSI(14)   {^2#2}    <span class="c-comment">// indicator pane 2</span></pre>
+        <p><code>{^}</code> price pane · <code>{^1}/{^2}/{^3}</code> indicator panes · <code>{#2}</code> decimal places · <code>{%}</code> percent</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">How do I export results to CSV?</div>
+      <div class="entry-a">
+        <pre>TestSettings:
+    SaveStatsAs:     Results\stats_?testname?.csv
+    SaveTradesAs:    Results\trades_?testname?.csv
+    SavePositionsAs: Results\positions_?testname?.csv</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     DOC 2 — CODING TIPS
+═════════════════════════════════════ -->
+<div class="doc-section" id="doc2">
+  <div class="doc-title">
+    <span class="num">02</span>
+    <div><h2>Coding Tips &amp; Best Practices</h2><div class="doc-subtitle">Idioms, structures, and performance habits used by experienced forum members</div></div>
+  </div>
+
+  <div class="topic-group" id="tips-structure">
+    <h3>Script structure: Data, Library, Parameters</h3>
+
+    <div class="entry">
+      <div class="entry-q">Choose the right home for each item</div>
+      <div class="entry-a">
+        <pre>Parameters:
+    length: 20          <span class="c-comment">// constants and optimization ranges — values only, never formulas</span>
+
+Data:
+    ma200: MA(C, 200)   <span class="c-comment">// expensive, reused, per-symbol time series — store it</span>
+
+Library:
+    spyClose: Extern($SPY, C)  <span class="c-comment">// evaluated on demand, in caller's context</span></pre>
+        <div class="callout flag"><span class="callout-icon">⚠</span><span>Never put constants in Data. <code>length: 4</code> in Data with 1000 stocks × 1000 bars = 1 million copies of the number 4 = 8MB wasted.</span></div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Data, Library, Parameters sections can repeat in a script</div>
+      <div class="entry-a"><p>Item names must be globally unique, but you can position a section directly above the strategy that uses it. Grouping related code makes long multi-strategy scripts far easier to maintain.</p></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Share code across scripts with Include</div>
+      <div class="entry-a">
+        <pre>Include: my_indicator_library.rts</pre>
+        <p>Pastes the other script's contents in memory before the test runs. Fix a shared indicator once and every strategy that includes it updates. Right-click a result → "Show Original Script" to see the fully expanded version.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="tips-speed">
+    <h3>Writing fast scripts</h3>
+
+    <div class="entry">
+      <div class="entry-q">Order AND-conditions cheapest-first</div>
+      <div class="entry-a">
+        <pre><span class="c-comment">// Faster: cheap price filters first, long MA last</span>
+EntrySetup: C &gt; 10 and C &lt; 200 and MA(V,20) &gt; 100000 and MA(C,50) &gt; MA(C,200)</pre>
+        <div class="callout warn"><span class="callout-icon">→</span><span>This same short-circuiting can hide a NaN warm-up period. Put the longest-lookback condition first if NaN propagation matters.</span></div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Pre-calculate indicators once in Data for one-pass speed</div>
+      <div class="entry-a">
+        <pre>Data:
+    ma200: MA(C, 200)        <span class="c-comment">// one-pass: stored, O(bars)</span>
+    <span class="c-comment">// ma200x: MA(C, 200) + 0  // NOT one-pass: operator outside function</span>
+    <span class="c-comment">// maVar: MA(C, myLen)      // NOT one-pass if myLen varies per bar</span></pre>
+        <p>Use <code>#SlowCalc</code> to force per-bar behavior when needed.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Cap SinceTrue with a length argument</div>
+      <div class="entry-a">
+        <pre>barsSinceEarnings: SinceTrue(Event(1), 65)  <span class="c-comment">// never look back more than 65 bars</span></pre>
+        <p>Without the cap, if the condition hasn't happened in hundreds of bars, every bar pays for a long backward scan.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Use #OnePerDate for market-wide values</div>
+      <div class="entry-a">
+        <pre>Data:
+    #OnePerDate spyTrend: Extern($SPY, C &gt; MA(C, 200))</pre>
+        <p>Computes once per date instead of once per symbol. Forum users report optimizations dropping from ~7 minutes to 2 by applying this to the right items.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="tips-formulas">
+    <h3>Formula language</h3>
+
+    <div class="entry">
+      <div class="entry-q">Conditions need a comparison; prices must not have one</div>
+      <div class="entry-a">
+        <pre>EntrySetup: C = HHV(C, 20)   <span class="c-comment">// condition: has comparison</span>
+EntryStop:  HHV(C, 20)       <span class="c-comment">// price: no comparison</span>
+ExitRule:   Dividend &gt; 0     <span class="c-comment">// condition — NOT just "Dividend" (floored to int)</span></pre>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Handle missing values with NoNan and IsNaN</div>
+      <div class="entry-a">
+        <pre>trendDir: NoNan(trendDir[1], 1)             <span class="c-comment">// carry forward, default 1 on bar 1</span>
+label:    if(NoNan(?Strategy = 'mr'), 1, 0)  <span class="c-comment">// guard ?Strategy NaN</span></pre>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Pick a formula by index with Item()</div>
+      <div class="entry-a">
+        <pre>Parameters:
+    stopType: 1 to 3 def 1
+Library:
+    stop1: C - 2*ATR(20)
+    stop2: Lowest(L, 20)
+    stop3: FillPrice * 0.95
+    stop:  Item("stop{#}", stopType)  <span class="c-comment">// optimizer sweeps named alternatives</span></pre>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Detect crossovers with Cross()</div>
+      <div class="entry-a">
+        <pre>macdUp:   Cross(MACDH(13,26,9), 0)   <span class="c-comment">// histogram crosses above zero</span>
+macdDown: Cross(0, MACDH(13,26,9))   <span class="c-comment">// histogram crosses below zero</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="tips-selfref">
+    <h3>Self-referential items &amp; state</h3>
+
+    <div class="entry">
+      <div class="entry-q">Carry a value forward until a reset — WhenTrue()</div>
+      <div class="entry-a">
+        <pre>triggerOpen: WhenTrue(crossedBelow50[1], O)  <span class="c-comment">// holds Open from trigger bar</span></pre>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Flip / ExRem-style state gates</div>
+      <div class="entry-a">
+        <pre>Data:
+    buy:   C = HHV(C, 10)
+    sell:  C = LLV(C, 10)
+    flip:  not sell and (buy or flip[1])   <span class="c-comment">// on at buy, off at sell</span>
+    fresh: buy and not flip[1]              <span class="c-comment">// only the first buy of a run</span></pre>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Fresh-setup gate to prevent re-signaling an open trade</div>
+      <div class="entry-a">
+        <pre>Data:
+    inpos: if(BarNum = 1 or exit[1], 0, if(inpos[1] or setup[1], 1, 0))
+Strategy:
+    EntrySetup: not inpos and setup</pre>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Two Data items can't reference each other's [1] values — use TestData</div>
+      <div class="entry-a">
+        <pre>TestData:
+    flip: if(BarNum = 1, C, if(flip[1] &lt; 0, ...))
+    pct:  if(flip[1] &lt; 0, 5, pct[1] + 1)</pre>
+        <p><code>TestData</code> runs sequentially inside the backtest loop and allows forward references with offsets.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="tips-crosssect">
+    <h3>Cross-sectional # functions</h3>
+
+    <div class="entry">
+      <div class="entry-q">Rank symbols against each other</div>
+      <div class="entry-a">
+        <pre>Data:
+    momRank: #rank ROC(C, 20)    <span class="c-comment">// rank 1 = highest value</span>
+    mrRank:  #rank 1 / RSI(2)    <span class="c-comment">// inverted: most oversold ranks highest</span></pre>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Rank only qualifying symbols — use NaN to exclude</div>
+      <div class="entry-a">
+        <pre>offRank:  #rank if(InList("Offensive"), relMom, NaN)
+bondRank: #rank if(InList("Bonds"),     relMom, NaN)</pre>
+        <p>NaN drops non-candidates from rank slots entirely.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Multi-lookback momentum factor (VAA/BAA/HAA)</div>
+      <div class="entry-a">
+        <pre>factor: 1/4 * (12*ROC(C,1) + 4*ROC(C,3) + 2*ROC(C,6) + 1*ROC(C,12))</pre>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Measure breadth and rank within sectors</div>
+      <div class="entry-a">
+        <pre>pctAboveMA:  #sum (C &gt; MA(C,200)) / #count 1 * 100
+sectAvgRoc:  #avg #BySect ROC(C, 5)
+newHighs:    #sum #ByIndu (InSPX and C = HHV(C, 252))</pre>
+        <div class="callout warn"><span class="callout-icon">→</span><span>Cross-sectional functions only work reliably on daily bars. Derive weekly/monthly logic from daily data using <code>weekly_</code> prefix or <code>Extern(~Weekly,...)</code>.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="tips-extern">
+    <h3>Other symbols &amp; timeframes</h3>
+
+    <div class="entry">
+      <div class="entry-q">Extern() prefix reference guide</div>
+      <div class="entry-a">
+        <pre>Extern($SPY, ...)      <span class="c-comment">// $ = stock symbol</span>
+Extern($$VIX, ...)     <span class="c-comment">// $$ = symbol itself starting with $</span>
+Extern(&amp;CL, ...)       <span class="c-comment">// &amp; = relative futures symbol</span>
+Extern(@stratName, ...)  <span class="c-comment">// @ = strategy name</span>
+Extern(~Weekly, ...)   <span class="c-comment">// ~ = timeframe</span></pre>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Weekly/monthly values in a daily test</div>
+      <div class="entry-a">
+        <pre>Data:
+    weekly_ma:   MA(C, 10)                  <span class="c-comment">// computed on weekly bars</span>
+    monthlyRoc:  Extern(~Monthly, ROC(C,12)) <span class="c-comment">// updates on period's final bar</span></pre>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Self-referential circuit breaker using a benchmark clone</div>
+      <div class="entry-a">
+        <pre>Benchmark: mrTracker
+    EntrySetup: universe and setup   <span class="c-comment">// always trades, no caps</span>
+
+Strategy: MeanRev
+    MaxSetups: if(Extern(@mrTracker, S.Equity &lt; Avg(S.Equity,50)), 0, 10)</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="tips-exits">
+    <h3>Entries, exits &amp; stops</h3>
+
+    <div class="entry">
+      <div class="entry-q">MaxSetups vs MaxPositions — two-stage pipeline</div>
+      <div class="entry-a">
+        <pre>MaxSetups:    40                  <span class="c-comment">// place the best 40 limit orders</span>
+SetupScore:   1000 - ROC(C, 5)
+MaxPositions: 5                   <span class="c-comment">// keep at most 5 fills</span>
+EntryScore:   1000 - ROC(C, 5)
+<span class="c-comment">// Don't exceed capacity:</span>
+MaxSetups:    MaxPositions - S.Positions</pre>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Anchor a stop to the entry bar</div>
+      <div class="entry-a">
+        <pre>ExitStop: FillPrice - atrStretch[BarsHeld]  <span class="c-comment">// BarsHeld as offset always reaches entry bar</span></pre>
+        <p><code>BarsHeld = 1</code> the day after entry, <code>2</code> the next — so <code>[BarsHeld]</code> always looks back to the entry day.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-q">Time stops and percentage targets</div>
+      <div class="entry-a">
+        <pre>ExitRule:  BarsHeld &gt;= 5                     <span class="c-comment">// use &gt;= not = so missed bars still trigger</span>
+ExitLimit: FillPrice * (1 + target/100)       <span class="c-comment">// long profit target</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="tips-sizing">
+    <h3>Position sizing recipes</h3>
+    <div class="entry">
+      <div class="entry-q">All four core recipes</div>
+      <div class="entry-a">
+        <pre><span class="c-comment">// 1. Fixed fractional (equal weight)</span>
+Quantity: 100 / MaxPositions  |  QtyType: Percent
+
+<span class="c-comment">// 2. Volatility-adjusted (ATR)</span>
+Quantity: 0.01 * S.Alloc / (3 * ATR(20))  |  QtyType: Shares
+
+<span class="c-comment">// 3. Fixed risk to stop</span>
+Quantity: 0.01 * S.Alloc / Abs(FillPrice - stopPrice)  |  QtyType: Shares
+
+<span class="c-comment">// 4. Scale by condition/regime</span>
+Library:
+    weight: if(strongSignal, 1.0, 0.5)
+Quantity: weight * (1 / MaxPositions)  |  QtyType: Percent</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="tips-portfolio">
+    <h3>Multi-strategy portfolios</h3>
+    <div class="entry">
+      <div class="entry-q">Share one capital pool with Template + Combined</div>
+      <div class="entry-a">
+        <pre>Template: common
+    Allocation: Combined(S.Equity)
+    QtyType: Percent
+
+Strategy: MeanRev
+    Using: common
+    Quantity: mrAlloc / mrPositions</pre>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Weight strategies by regime</div>
+      <div class="entry-a">
+        <pre>Library:
+    bullWeight: if(bullMarket, 1.0, 0.5)
+    bearWeight: if(bullMarket, 0.5, 1.0)
+Strategy: LongBias
+    Quantity: bullWeight * 0.1 * S.Alloc</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     DOC 3 — HIDDEN GEMS
+═════════════════════════════════════ -->
+<div class="doc-section" id="doc3">
+  <div class="doc-title">
+    <span class="num">03</span>
+    <div><h2>Hidden Gems</h2><div class="doc-subtitle">Powerful features most users miss</div></div>
+  </div>
+
+  <div class="topic-group" id="gems-outside">
+    <h3>Bring outside information into your backtest</h3>
+    <div class="entry">
+      <div class="entry-q">EventListFile — inject earnings, macro events, any dated data</div>
+      <div class="entry-a">
+        <pre>Import:
+    EventListFile: earnings.csv
+EntrySkip: SinceTrue(Event(1) &gt; 0) &lt; 5   <span class="c-comment">// skip 5 bars after event</span></pre>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Survivorship-free universes with constituency tracking</div>
+      <div class="entry-a">
+        <pre>Import:
+    Constituency: $SPX, $NDX
+    IncludeList: .Russell 1000 Current &amp; Past
+Strategy:
+    EntrySetup: InSPX and C &gt; MA(C, 200)  <span class="c-comment">// InSPX true only on actual member dates</span></pre>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">RTD files — import once, test all day</div>
+      <div class="entry-a"><p>Importing builds a binary <code>.rtd</code> file. Every subsequent test loads in seconds. Think of <code>.rtd</code> files as saved query results, not raw data. Keep several: a deep survivorship-free history for backtests, a trimmed current-universe file for live scans.</p></div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="gems-validate">
+    <h3>Honest validation</h3>
+    <div class="entry">
+      <div class="entry-q">Built-in walk-forward optimization</div>
+      <div class="entry-a"><p>First-class feature, not hand-scripted. Re-optimizes on each in-sample window and applies parameters to the following out-of-sample window automatically. Tests whether the process of periodic re-optimization holds up, not just whether one fixed parameter set fit the past.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">The optimizer is a general-purpose batch runner</div>
+      <div class="entry-a"><p>With date intervals it runs one test per year, or a rolling window incremented through history, with no parameters at all. "How sensitive am I to start date?" becomes one click.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">2D optimization heatmaps</div>
+      <div class="entry-a"><p>Plot a metric as color against two parameters at once. A broad flat plateau is far more trustworthy than a lone sharp peak — and the heatmap makes the difference instantly visible.</p></div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="gems-account">
+    <h3>Realistic account modeling</h3>
+    <div class="entry">
+      <div class="entry-q">RiskFreeRateSym — make Sharpe mean something</div>
+      <div class="entry-a">
+        <pre>Settings:
+    RiskFreeRateSym: %FFYE</pre>
+        <p>Default Sharpe uses 0% risk-free rate. Across eras of 5% cash that quietly flatters every strategy.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Model short borrow fees</div>
+      <div class="entry-a">
+        <pre>Commission: baseComm + if(Side &lt; 0 and IsExit,
+    borrowPct/100/252 * Abs(FillValue) * BarsHeld, 0)</pre>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">CashInOut — deposits, withdrawals, contributions</div>
+      <div class="entry-a">
+        <pre>CashInOut: if(EndOfMonth, 2000, 0)   <span class="c-comment">// contribute $2k each month</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="gems-output">
+    <h3>Richer output</h3>
+    <div class="entry">
+      <div class="entry-q">Export everything to CSV</div>
+      <div class="entry-a">
+        <pre>TestSettings:
+    SaveStatsAs:     Results\stats_?testname?.csv
+    SaveTradesAs:    Results\trades_?testname?.csv
+    SavePositionsAs: Results\positions_?testname?.csv</pre>
+        <p>Particularly useful when using AI to develop and test trading ideas via the RealTest command-line interface.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="gems-live">
+    <h3>Bridge to live trading</h3>
+    <div class="entry">
+      <div class="entry-q">Command-line automation</div>
+      <div class="entry-a">
+        <pre>realtest -import my_script.rts
+realtest -scan   my_script.rts</pre>
+        <p>Task Scheduler updates Norgate, runs the script, produces orders — fully hands-off daily pipeline.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="gems-meta">
+    <h3>Meta-strategies</h3>
+    <div class="entry">
+      <div class="entry-q">Volatility targeting and dynamic leverage</div>
+      <div class="entry-a">
+        <pre>Library:
+    vol:  Extern(@tracker, StdDev(ROC(S.Equity,1), 20) * Sqr(252))
+    mult: Min(volTarget / vol, maxLev)
+Strategy: vt
+    Quantity: S.Equity * mult / FillPrice</pre>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">DynamicSizing — rebalance in place without round-trips</div>
+      <div class="entry-a">
+        <pre>Strategy: ETF1
+    DynamicSizing: True
+    QtyType: Percent
+    Quantity: Select(EndOfMonth and Symbol = $ETF1, 20)</pre>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">StatsGroup — shared kill-switch across multiple strategies</div>
+      <div class="entry-a">
+        <pre>StatsGroup: sg
+    Using: bench1, bench2
+Strategy: live
+    EntrySkip: Extern(@sg, hveq20 &gt;= 30)</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="gems-speed">
+    <h3>Performance</h3>
+    <div class="entry">
+      <div class="entry-q">Skip slow formulas during optimization</div>
+      <div class="entry-a">
+        <pre>#ifndef Optimize
+    expensiveScanFormula: ...
+#endif</pre>
+        <p>Excludes chart/scan-only calculations from parameter sweeps at parse time.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Plot booleans to verify signals</div>
+      <div class="entry-a"><p>A boolean data item plots directly as 0 or 1 — drop a condition onto the chart and see exactly which bars it fired on. Fastest way to confirm a signal before building a strategy around it.</p></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     DOC 4 — GOTCHAS
+═════════════════════════════════════ -->
+<div class="doc-section" id="doc4">
+  <div class="doc-title">
+    <span class="num">04</span>
+    <div><h2>Gotchas</h2><div class="doc-subtitle">Behaviors that look like bugs but aren't — scan here before assuming a bug</div></div>
+  </div>
+
+  <div class="topic-group" id="gotcha-timing">
+    <h3>Order timing &amp; execution</h3>
+    <div class="entry">
+      <div class="entry-q">ThisClose exits can't become live orders</div>
+      <div class="entry-a">
+        <pre><span class="c-comment">// Replace: exit at this close if up day</span>
+ExitRule: BarsHeld &gt;= 5
+ExitTime: NextClose
+ExitLimit: C + 0.01    <span class="c-comment">// fills tomorrow at close if close > today's close</span></pre>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Stop and target on same bar — the Ambiguity setting</div>
+      <div class="entry-a"><p>When both stop and target fall inside the same daily bar's range, RealTest can't know which was hit first. Test under both <code>Ambiguity: Stop</code> and <code>Ambiguity: Target</code>. If results differ significantly, stops/targets are too tight — treat as a red flag, not a tuning problem.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Entry-day stops quietly flatter results</div>
+      <div class="entry-a">
+        <pre>ExitStop: if(BarsHeld = 0, 0, yourStopFormula)  <span class="c-comment">// conservative: no stop on entry bar</span></pre>
+        <p>Tight entry-day stops produce more (smaller) trades, mechanically inflating Sharpe even when win rate drops.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Limit prices are tick-rounded before comparison</div>
+      <div class="entry-a"><p>Equality tests like <code>long_limit = L[-1]</code> fail because the formula variable holds the unrounded value. Use <code>LimitExtra: 0.01</code> instead.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Separate MOO slippage from other fills</div>
+      <div class="entry-a">
+        <pre>OpenSlip: 0       <span class="c-comment">// market-on-open fills</span>
+Slippage: 0.01    <span class="c-comment">// all other transactions</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="gotcha-nan">
+    <h3>NaN &amp; formula evaluation</h3>
+    <div class="entry">
+      <div class="entry-q">TRUE or NaN = NaN — condition order matters</div>
+      <div class="entry-a">
+        <pre>skip: IsNaN(rank1) or rank1 &gt; MaxPos   <span class="c-comment">// correct — NaN guard first</span>
+<span class="c-comment">// rank1 > MaxPos or IsNaN(rank1)        // WRONG — NaN propagates from first term</span></pre>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">0 * NaN = 0, not NaN</div>
+      <div class="entry-a"><p>Short-circuit optimization: when the evaluator sees <code>0 * expression</code>, it skips evaluating the expression entirely and never discovers the NaN. Add an explicit <code>IsNaN()</code> check where the distinction matters.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Short-circuiting can hide indicator warm-up</div>
+      <div class="entry-a">
+        <pre><span class="c-comment">// Put longest-lookback condition first so its NaN propagates correctly</span>
+EntrySetup: C &gt; MA(C, 500) and InRUI and C &gt; 5</pre>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">EMA in Data vs inline EMA can diverge for long lengths</div>
+      <div class="entry-a"><p>Data section EMA is one-pass from bar 1. Inline EMA approximates with ~5x lookback. For long EMAs on long histories this can flip a comparison. Pre-calculate long exponential indicators in Data and reference everywhere.</p></div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="gotcha-context">
+    <h3>Formula context</h3>
+    <div class="entry">
+      <div class="entry-q">Data / Library / Strategy evaluate at different times</div>
+      <div class="entry-a"><p><strong>Data</strong>: computed once before test runs — no strategy context, no BarsHeld, no S.Equity. <strong>Library</strong>: evaluated on demand, inherits caller's context. <strong>Strategy</strong>: full context, inside the backtest loop per bar per symbol.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Offsets on data items are not split-adjusted</div>
+      <div class="entry-a"><p>Direct price references like <code>C[1]</code> are split-adjusted as of the current bar. Once a data item is calculated, offset references to it don't receive split adjustment. Where split-sensitivity matters, use the indicator function directly in the comparison.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Parameters persist between script runs</div>
+      <div class="entry-a"><p>Intentional — parameters persist in memory until the next script with a Parameters section is run. Add an empty <code>Parameters:</code> section to a script to clear the previous set.</p></div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="gotcha-sizing">
+    <h3>Position sizing math</h3>
+    <div class="entry">
+      <div class="entry-q">Keep Allocation to three values only</div>
+      <div class="entry-a">
+        <pre>Allocation: S.StartEquity      <span class="c-comment">// or S.Equity, or Combined(S.Equity)</span>
+Quantity: 50                   <span class="c-comment">// sizing logic lives here, not in Allocation</span>
+QtyType: Percent</pre>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Always use Abs(FillValue) in commission formulas for shorts</div>
+      <div class="entry-a">
+        <pre>Commission: Min(Max(1.00, 0.005 * Shares), 0.01 * Abs(FillValue))</pre>
+        <p>Short fills have negative FillValue. Without <code>Abs()</code>, commission becomes a credit, compounding equity into absurd territory until it crosses <code>MaxInvested</code>'s default cap of 1.0E+14.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">S.Exposure vs S.Invested vs S.Usage</div>
+      <div class="entry-a"><p><code>S.Exposure</code>: sum of position sizes at entry / S.Alloc — open P&L doesn't move it. <code>S.Invested</code>: current MTM value / S.Alloc. <code>S.Usage</code>: peak intraday exposure — can exceed overnight for day-trading.</p></div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="gotcha-calendar">
+    <h3>Global market calendar</h3>
+    <div class="entry">
+      <div class="entry-q">Adding FX or crypto makes stocks miss holiday bars</div>
+      <div class="entry-a">
+        <pre>Import:
+    Padding: AlignWithSymbol
+    PadAlignSym: SPY</pre>
+        <p>FX trades on US holidays — the holiday becomes a global market date, every stock gets a "missing bar", and RealTest won't enter right after a missing bar.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">EndOfMonth uses global calendar; Month uses symbol's own</div>
+      <div class="entry-a">
+        <pre>rebalance: Month &lt;&gt; Month[-1]   <span class="c-comment">// symbol-specific — safe with mixed calendars</span></pre>
+        <p>Adding EURUSD can shift EndOfMonth triggers for all stocks.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="gotcha-data">
+    <h3>Data, splits &amp; dividends</h3>
+    <div class="entry">
+      <div class="entry-q">Backtesting today's index members is look-ahead bias</div>
+      <div class="entry-a">
+        <pre>IncludeList: .Russell 1000 Current &amp; Past   <span class="c-comment">// always use this</span></pre>
+        <p>Current list only contains survivors. Every bankruptcy and chronic underperformer has been filtered out by the future.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Norgate revises data overnight</div>
+      <div class="entry-a"><p>Revisions finish ~6:45 AM ET. Generate live orders morning-of, not prior evening. Results changing between identical runs is almost always a data revision or a setting difference.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Capital vs TotalReturn — both include dividends, at different times</div>
+      <div class="entry-a"><p><code>Capital</code>: credits dividends at trade exit (realistic, use for backtesting and order generation). <code>TotalReturn</code>: applies dividends as share adjustments on ex-date (long-horizon total-return comparisons). Neither drops dividends.</p></div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="gotcha-ranking">
+    <h3>Ranking &amp; selection</h3>
+    <div class="entry">
+      <div class="entry-q">SetupScore only needed when also using MaxSetups</div>
+      <div class="entry-a"><p><code>SetupScore</code> (with <code>MaxSetups</code>) decides which candidate orders get placed. <code>EntryScore</code> (with <code>MaxPositions</code>) decides which placed orders are assumed filled. You only need <code>SetupScore</code> if you're also using <code>MaxSetups</code>.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Cross-sectional functions only work reliably on daily bars</div>
+      <div class="entry-a"><p>Run on daily bars and derive weekly/monthly logic from daily data. Weekly/monthly <code>#rank</code> also returns NaN when symbols have mixed missing bars at period boundaries — fix with <code>Padding: AllMarketDays</code>.</p></div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="gotcha-charts">
+    <h3>Charts &amp; display</h3>
+    <div class="entry">
+      <div class="entry-q">Chart bar size is independent of the script's BarSize</div>
+      <div class="entry-a"><p>Chart formulas recalculate for whatever the chart is currently displaying. For consistency, compute in Data and plot the stored item.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Charts can "see" data the backtest couldn't — this is not look-ahead</div>
+      <div class="entry-a"><p>Charts are drawn after the test from the complete dataset. The backtest's decisions used only prior data. To verify backtest context, plot <code>MA(C[1], 200)</code> not <code>MA(C, 200)</code>.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Benchmarks always report as non-compounded</div>
+      <div class="entry-a"><p>Intentional — benchmarks don't contribute to combined stats. If you need a compounded buy-and-hold comparison, define it as a Strategy instead.</p></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     DOC 5 — ORDERCLERK
+═════════════════════════════════════ -->
+<div class="doc-section" id="doc5">
+  <div class="doc-title">
+    <span class="num">05</span>
+    <div><h2>Live Trading with OrderClerk</h2><div class="doc-subtitle">Practical workflow from first connection through daily operation and troubleshooting</div></div>
+  </div>
+
+  <div class="topic-group" id="oc-workflow">
+    <h3>Daily workflow (start here)</h3>
+    <div class="entry">
+      <div class="entry-q">The four steps — in this order, every day</div>
+      <div class="entry-a">
+        <p>1. Open TWS with Trade History window showing 5–7 days of fills.<br>
+        2. Connect OrderClerk to IB — pulls fills, updates OrderClerkTrades.csv.<br>
+        3. Run RealTest in Orders mode against those up-to-date positions.<br>
+        4. Load orders in OrderClerk, review, transmit.</p>
+        <div class="callout flag"><span class="callout-icon">⚠</span><span>Cardinal rule: connect OrderClerk to IB <em>before</em> generating orders. Skipping causes duplicate entry orders for already-filled positions. Most "out of sync" problems trace here.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="oc-connect">
+    <h3>Connecting to Interactive Brokers</h3>
+    <div class="entry">
+      <div class="entry-q">TWS API silently disables after updates</div>
+      <div class="entry-a"><p>In TWS Global Configuration → API → Settings, enable "Allow ActiveX and Socket Clients." Check this after every TWS update — the most common cause of OrderClerk failing to connect.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Keep the Trade History window open and showing multiple days</div>
+      <div class="entry-a"><p>OrderClerk reads fills from the TWS Trade History (executions) window. Closed window or "today only" = no prior-day fills received = phantom cancels. Open it, set 5–7 days, leave it open before every connect.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Use Stable Offline TWS — not Latest</div>
+      <div class="entry-a"><p>The "latest" channel auto-updates without user intervention causing automation failures. Plan for IB's weekly Sunday two-factor reset — re-authenticate manually before Monday or use IBC.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Separate folders for paper vs live</div>
+      <div class="entry-a"><p>The <code>OrderClerkFolder</code> setting tells RealTest where OrderClerk's files live. Sending live orders into a paper folder (or vice versa) corrupts position tracking. One folder per account, path set explicitly in each script.</p></div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="oc-orders">
+    <h3>Order types by exchange</h3>
+    <div class="entry">
+      <div class="entry-q">ThisClose is incompatible with OrderClerk</div>
+      <div class="entry-a"><p>Use <code>NextClose</code> for all close-based entries and exits. <code>ThisClose</code> requires knowing today's closing price before it happens — causally impossible for advance order placement.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Crossing orders — "would cross a related resting order"</div>
+      <div class="entry-a"><p>When one strategy sells a symbol the same day another buys it, IB rejects the pair. Fix: stagger with Good-After-Time, or submit one as OPG and one as MOC so they don't sit live simultaneously (plain market orders — algos can't take good-after-time).</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Large orders may require an algo</div>
+      <div class="entry-a"><p>IB rejects very large plain market orders. Submit as IB algo order or cap order size in the sizing formula.</p></div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="oc-reconcile">
+    <h3>Reconciliation</h3>
+    <div class="entry">
+      <div class="entry-q">Edit OrderClerkTrades.csv in plain text only — never Excel</div>
+      <div class="entry-a"><p>Excel silently rewrites dates to local format and can add stray rows, both of which break OrderClerk. Edit in a plain-text editor, back up first, close OrderClerk before editing.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Resynchronize after a missed day</div>
+      <div class="entry-a"><p>Switch <code>OrdersMode</code> to <code>OrderClerkSync</code> — replays trade list to last known point, backtests the gap, generates catch-up orders. Review carefully before transmitting — sync generates both entries and exits.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Entry showing 0 shares filled = missed fill, not cancel</div>
+      <div class="entry-a"><p>Classic cause: connecting after trade date with Trade History window not showing that day. Restore trade list from before the missed date and reconnect with history window open.</p></div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="oc-corporate">
+    <h3>Corporate actions</h3>
+    <div class="entry">
+      <div class="entry-q">Quick reference</div>
+      <div class="entry-a">
+        <p><strong>Splits:</strong> usually automatic — only intervene if share count mismatch flagged.<br>
+        <strong>Takeovers:</strong> add exit row at cash-per-share, no commission; use IB corporate action report for settlement details.<br>
+        <strong>Spinoffs:</strong> add as new trade at IB's cost-basis allocation price; recheck next day for revisions.<br>
+        <strong>Ticker changes:</strong> update in trade list and regenerate. IB symbol and data-vendor symbol can change at different times.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="oc-timezones">
+    <h3>Timezones &amp; holidays</h3>
+    <div class="entry">
+      <div class="entry-q">Holiday handling — simplest approach</div>
+      <div class="entry-a"><p>If automation runs on a holiday, it regenerates the same orders as the prior day and OrderClerk rejects duplicates harmlessly — no action needed. The HolidayList alternative is fragile across day-before scheduling and multiple markets.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">EndDate: Latest can resolve to the wrong day</div>
+      <div class="entry-a"><p>If some symbols already have today's bar when orders are generated, "Latest" resolves to today instead of yesterday, dating orders wrong. Use an explicit prior-session EndDate or align the calendar.</p></div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="oc-automation">
+    <h3>Automation</h3>
+    <div class="entry">
+      <div class="entry-q">Leave a pause between connect and order generation</div>
+      <div class="entry-a"><p>In a fully automated sequence, give OrderClerk a brief pause after connecting before generating orders — fills need to fully sync first. Without it, a race can produce an exit order for a position that has already been closed.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Size to the live account balance dynamically</div>
+      <div class="entry-a"><p>Let OrderClerk write the current net liquidation value to a file on each connect and have the script size from that — orders track real account value as it grows, shrinks, or receives deposits.</p></div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="oc-multi">
+    <h3>Multiple accounts &amp; exchanges</h3>
+    <div class="entry">
+      <div class="entry-q">One OrderClerk folder per exchange</div>
+      <div class="entry-a"><p>Safest multi-exchange setup: separate folder per market, each driven by its own script at its own time. A shared folder requires markets' runs to be well separated in time and daily difference review.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Rename a strategy only when flat</div>
+      <div class="entry-a"><p>OrderClerk tracks orders by strategy name. Renaming mid-trade strands the old reference and order status is lost. Rename only when no open orders, then update both script and trade list.</p></div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="oc-trouble">
+    <h3>Troubleshooting by symptom</h3>
+    <div class="entry">
+      <div class="entry-q">Quick reference</div>
+      <div class="entry-a">
+        <p><strong>"Unable to convert server timezone" loop:</strong> transient minute-boundary mismatch — disconnect and reconnect.<br>
+        <strong>WaitNextId error:</strong> TWS update disabled API — re-enable "Allow ActiveX and Socket Clients."<br>
+        <strong>WaitFills code 322:</strong> fills query too broad — reduce days requested, connect daily after close.<br>
+        <strong>BadDate / 0001-01-01:</strong> missing Date field in order template or clock timezone mismatch.<br>
+        <strong>Error 200:</strong> symbol not found or exchange mapping wrong.<br>
+        <strong>Error 201:</strong> stale/illiquid — generate orders during market hours.<br>
+        <strong>Too large:</strong> submit as IB algo order or cap size in Quantity formula.<br>
+        <strong>Stuck pending orders:</strong> cancel via OrderClerk open-orders view; if stuck, close OC and delete pending-orders file.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     DOC 6 — STRATEGY PATTERNS
+═════════════════════════════════════ -->
+<div class="doc-section" id="doc6">
+  <div class="doc-title">
+    <span class="num">06</span>
+    <div><h2>Strategy Patterns &amp; Worked Examples</h2><div class="doc-subtitle">Catalog of systematic archetypes — structure and edge, not finished systems. Validate on current data before risking capital.</div></div>
+  </div>
+
+  <div class="topic-group" id="pat-mr">
+    <h3>Mean reversion</h3>
+    <div class="entry">
+      <div class="entry-q">mr_sample — the canonical reference</div>
+      <div class="entry-a">
+        <pre>MaxSetups:    MaxPositions - S.Positions
+SetupScore:   1000 - ROC(C, 5)   <span class="c-comment">// favor weakest</span>
+EntryLimit:   L
+ExitRule:     BarsHeld &gt;= holdDays</pre>
+        <div class="callout warn"><span class="callout-icon">→</span><span>Short side carries real tail risk — large drawdowns in 1999–2000, 2020, and squeeze events. Use a long MA filter to suppress entries in falling markets.</span></div>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Connors RSI(2) / PowerZones</div>
+      <div class="entry-a">
+        <pre>EntrySetup: C &gt; MA(C,200) and RSI(2) &lt; 25
+ExitRule:   RSI(2) &gt; 70</pre>
+        <p>Works best on liquid index ETFs. March 2020 exposes the tail risk of buying falling knives.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">IBS — internal bar strength filter</div>
+      <div class="entry-a">
+        <pre>Data:
+    IBS: (C - L) / (H - L)
+EntrySetup: ...existing MR setup... and IBS &lt; 0.3</pre>
+        <p>Filter, not standalone edge. Tighter IBS cap raises fill rate but lowers per-trade expectancy — a tradeoff, not a free lunch.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Connors TPS — scaling into weakness with multiple legs</div>
+      <div class="entry-a">
+        <pre>Strategy: L1
+    EntrySetup: trendFilter and RSI(2) &lt; 25
+Strategy: L2
+    EntrySetup: trendFilter and Extern(@L1, BarsHeld &gt; 0 and C &lt; FillPrice)</pre>
+        <p>Strong on indices (SPY/QQQ/DIA), weak on individual stocks. Requires <code>MaxExposure</code> cap.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="pat-trend">
+    <h3>Trend following &amp; breakout</h3>
+    <div class="entry">
+      <div class="entry-q">Donchian breakout — ratcheting stop</div>
+      <div class="entry-a">
+        <pre>EntryStop: Highest(H, 20) + TickSize
+ExitStop:  max(PrevExitStop, Lowest(L, 10) - TickSize)</pre>
+        <div class="callout warn"><span class="callout-icon">→</span><span>Forum consensus: MAR ≥ 1 from pure trend following on a broad stock universe is very hard. Lives better on futures, small-caps, or rotational momentum.</span></div>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Trend following vs breakout — the design distinction</div>
+      <div class="entry-a"><p><em>Trend following</em>: enters on breakout, exits only on trailing stop — rides the whole trend. <em>Breakout</em>: same entry, adds profit target / time stop / indicator exit — captures a shorter directional move. Same entry, different exit philosophy, very different holding periods and statistics.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Stockbee momentum burst — cautionary note on mechanization</div>
+      <div class="entry-a"><div class="callout flag"><span class="callout-icon">⚠</span><span>Purely mechanical version deteriorated badly after mid-2000s. The live trader's judgment about which setups to take is doing much of the work. Before mechanizing a discretionary system, search whether others already tried — the forum is an honest record of what was attempted and what failed.</span></div></div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="pat-rotation">
+    <h3>Momentum rotation &amp; asset allocation</h3>
+    <div class="entry">
+      <div class="entry-q">Dual momentum (GEM) — Antonacci</div>
+      <div class="entry-a">
+        <pre>Data:
+    SPYROC:    Extern($SPY, ROC(C,12))
+    HoldWhat:  if(SPYROC &gt; VEUROC, if(SPYROC &gt; BILROC, $SPY, $AGG),
+                  if(VEUROC &gt; BILROC, $VEU, $AGG))
+Strategy:
+    EntrySetup: HoldWhat = Symbol
+    ExitRule:   HoldWhat != Symbol or Dividend &gt; 0</pre>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Keller canary allocation (HAA/BAA)</div>
+      <div class="entry-a">
+        <pre>Data:
+    factor:  1/4 * (12*ROC(C,1) + 4*ROC(C,3) + 2*ROC(C,6) + 1*ROC(C,12))
+    offRank: #rank if(InList("Offensive"), factor, NaN)</pre>
+        <p>Canary assets act as market-health tripwire. Strong in crises, lags in narrow-leadership markets. Example scripts ship with RealTest.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Cascading multi-rank rotation</div>
+      <div class="entry-a">
+        <pre>Data:
+    rank1: #rank canHold * ROC(C,500)
+    rank2: #rank (rank1 &lt;= cut1) * ROC(C,250)
+    rank3: #rank (rank2 &lt;= cut2) * ROC(C,125)
+EntrySetup: EndOfMonth and rank3 &lt;= positions and bullMarket</pre>
+        <p>Robust across parameter sweeps. Market filter is critical.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Permanent / All-Weather portfolio with DynamicSizing</div>
+      <div class="entry-a">
+        <pre>Template: Common
+    DynamicSizing: True
+    QtyType: Percent
+Strategy: _SPY
+    Quantity: Select(EndOfMonth and Symbol = $SPY, 30)</pre>
+        <p>Appeal: no optimizable parameters, rebalances in place without round-trips.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="pat-bensdorp">
+    <h3>Bensdorp multi-system framework</h3>
+    <div class="entry">
+      <div class="entry-q">The meta-lesson</div>
+      <div class="entry-a">
+        <p>The lesson is the <em>combination</em>, not any single piece: long trend + long MR + short MR + volatility variants on one shared pool so each system's weak period is covered by another.</p>
+        <div class="callout warn"><span class="callout-icon">→</span><span>Documented edge decay since ~2019 — published-era returns exceed recent backtests. Validate on current data before trading. The full <code>bensdorp_book.rts</code> is in the Examples folder.</span></div>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Bensdorp NDX — cautionary split-adjustment error</div>
+      <div class="entry-a"><p>Ranking on <code>C*V*split</code> instead of <code>C*V</code> introduced look-ahead bias that inflated results. Always check that ranking inputs are unadjusted.</p></div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Hedging leg finding</div>
+      <div class="entry-a"><div class="callout flag"><span class="callout-icon">⚠</span><span>The book's index-short hedge is a consistent money-loser as standalone. A "hedge" has a cost that must be justified by what it protects — don't assume a hedge adds value without testing it independently.</span></div></div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="pat-moc">
+    <h3>MOC &amp; day trading</h3>
+    <div class="entry">
+      <div class="entry-q">Radge MOC day trade — reference structure</div>
+      <div class="entry-a">
+        <pre>EntrySetup: InRUI and C &gt; 20
+SetupScore: 1000 - roc5
+EntryLimit: L - atr5
+ExitRule:   1
+ExitTime:   AtClose</pre>
+        <p>Add <code>LimitExtra</code> to reflect fill uncertainty near the low. Rank by recent setup quality, not past symbol performance.</p>
+        <div class="callout warn"><span class="callout-icon">→</span><span><code>ThisClose</code> entry cannot be a live order — use <code>NextClose</code>-based logic for live trading.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic-group" id="pat-overlays">
+    <h3>Overlays, hedges &amp; combining systems</h3>
+    <div class="entry">
+      <div class="entry-q">Market breadth regime filter</div>
+      <div class="entry-a">
+        <pre>Data:
+    breadth: Extern($#SPX%MA20, C)
+EntrySetup: breadth &lt;= breadthValue and Universe</pre>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Pairs / relative value</div>
+      <div class="entry-a">
+        <pre>Data:
+    ratio: Extern($NVDA, C) / Extern($AAPL, C)
+    z:     (ratio - Avg(ratio, 20)) / StdDev(ratio, 20)</pre>
+        <p>Two legs = two strategies. Must be cointegrated, not just correlated. Sizing sync is non-trivial.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">Combining non-correlated systems — the meta-pattern</div>
+      <div class="entry-a">
+        <pre>Template: Common
+    Allocation: Combined(S.Equity)
+Strategy: trend
+Strategy: meanrev
+Strategy: shortleg</pre>
+        <div class="callout info"><span class="callout-icon">→</span><span>Combined pool result differs from summing standalone backtests. Capital contention and same-symbol overlap are real interaction effects — always test the combination, not the parts in isolation. Add <code>Combined(Shares) = 0</code> to EntrySetup of each strategy to prevent cross-strategy overlap.</span></div>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-q">When a pattern resists mechanization</div>
+      <div class="entry-a"><p>Some celebrated chart patterns (Minervini VCP, Stockbee burst) have repeatedly defeated full mechanization on the forum. The recurring finding: their edge depends on context and selection judgment that's hard to reduce to rules. Search the forum for prior attempts before committing to replicate a discretionary system.</p></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>RealTest reference — built from the community forum. Thanks to Marsten Parker (@mhp) and Adrian Reid (Enlightened Stock Trading). Norgate daily data · US equities · daily timeframe.</p>
+</footer>
+
+</main>
+
+<script>
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('nav a');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, {rootMargin: '-20% 0px -70% 0px'});
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
